@@ -35,6 +35,9 @@
 **Push to remote:**  
 `git push`
 
+### Before developing any features
+`git checkout -b <branch_name>`  
+
 ### Before any merge
 **Change to "merge into" branch**  
 `git checkout dev`  
@@ -43,5 +46,4 @@
 
 ## Links
 [Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)  
-[Preview and test md](https://markdownlivepreview.com/)  
 [Git Flow Video](https://www.youtube.com/watch?v=mZzmaC0pn1c)
