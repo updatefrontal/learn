@@ -2,48 +2,74 @@
 
 ## Structure and Workflow
 [Git Flow Video](https://www.youtube.com/watch?v=mZzmaC0pn1c)
-- Main Branch for Finished Releases (tagged)
-- - Occasional Hotfix Branch for Main Branch fixes without needing to QA Dev branch
-- Dev branch for woking on the next Finished Release
-- - Occasional Release Branch to test tentative Finished Release, successful release branches merge into Main and Dev (if fixes were made during this phase)
-- - Short lived Feature Branches that merge into Dev Branch when Feature is "done"
 
-### Notes 
-- when merging remember to disable fast forward (--no-ff)  
-`git checkout dev`  
-`git merge --no-ff -m "Merge A into Dev" A`
+- **Main Branch** for Finished Releases (tagged)
+  - Occasional **Hotfix Branch** for urgent fixes to Main without going through QA/dev
+- **Dev Branch** for working on the next Finished Release
+  - Occasional **Release Branch** to QA/test a tentative release  
+    (merges into Main and Dev if changes were made)
+  - Short-lived **Feature Branches** that merge into Dev when feature is complete
+
+### Notes
+- Always disable fast-forward merges (`--no-ff`) to preserve merge history
+
+```bash
+git checkout dev
+git merge --no-ff -m "Merge A into Dev" A
+```
+
+---
 
 ## Guidelines
-### Before any commit
 
-**Pull latest changes from remote:**  
-`git pull`
+### Before Any Commit
 
-**Check changed files:**  
-`git status`
+```bash
+# Pull the latest changes from remote
+git pull
 
-**Add changed files you want to stage:**  
-`git add .`  
-`git add <file_path>`
+# See what files were changed
+git status
 
-**Check again to confirm staging:**  
-`git status`
+# Stage all changed files
+git add .
 
-**Commit your changes with a short, affirmative message:**  
-`git commit -m "This is the commit message"`
+# Or stage specific files
+git add <file_path>
 
-**Push to remote:**  
-`git push`
+# Confirm staged files
+git status
 
-### Before developing any features
-`git checkout -b <branch_name>`  
+# Commit with a clear message
+git commit -m "This is the commit message"
 
-### Before any merge
-**Change to "merge into" branch**  
-`git checkout dev`  
-**Merge without fast forward and name it appropriately**  
-`git merge --no-ff -m "Merge A into Dev" A`
+# Push changes to remote
+git push
+```
+
+---
+
+### Before Developing Any Features
+
+```bash
+# Create and switch to a new feature branch
+git checkout -b <branch_name>
+```
+
+---
+
+### Before Any Merge
+
+```bash
+# Switch to the branch you are merging into (e.g. dev)
+git checkout dev
+
+# Merge your branch (e.g. A) into dev with no fast forward
+git merge --no-ff -m "Merge A into Dev" A
+```
+
+---
 
 ## Links
-[Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)  
+[Git Cheat Sheet (GitHub Education)](https://education.github.com/git-cheat-sheet-education.pdf)  
 [Git Flow Video](https://www.youtube.com/watch?v=mZzmaC0pn1c)
