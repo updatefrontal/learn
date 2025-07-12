@@ -143,3 +143,72 @@ func _process(delta):
 - `Sprite2D` attributes like `position` and `rotation` are used to move the node  
 
 ---
+
+### Using Signals (`learn/godot/gdot-docs-project`)
+
+**Signal**: Messages that nodes emit when a specific event happens.  
+Other nodes can connect to that signal and call a function when the event occurs.
+
+#### Connecting Signals in the Editor
+
+**Steps:**
+
+1. Open the **Node** tab (top-right)
+2. Double-click the signal you want to connect (e.g. `pressed()`)
+3. Select:
+   - **Listeners** (nodes that will receive the signal)
+   - **Receiver method** (callback function to call)
+
+- **Simple mode**: Select nodes with scripts and Godot auto-generates the callback function
+- **Advanced mode**: Choose any node, method, add arguments, and set options
+
+Once connected, a **callback function** is added to the listener’s script, marked with a **green arrow** in the editor.
+
+**Callback Naming Convention:**
+
+```gdscript
+func _on_<node_name>_<signal_name>():
+    # Example:
+    func _on_timer_timeout():
+        print("Timer finished!")
+```
+
+#### Connecting Signals via Code
+
+Use this approach when creating or instantiating nodes in a script.
+
+**Steps:**
+
+1. Get a reference to the node emitting the signal  
+2. Use `.connect()` to bind the signal to a function
+
+```gdscript
+var timer = get_node("Timer")
+timer.connect("timeout", self, "_on_timer_timeout")
+```
+
+- This will call `_on_timer_timeout()` whenever the `timeout` signal is emitted by `timer`
+
+#### Custom Signals
+
+You can define your own signals at the top of a script using the `signal` keyword.
+
+```gdscript
+signal health_depleted
+
+func take_damage(amount):
+    health -= amount
+    if health <= 0:
+        health_depleted.emit()
+```
+
+Custom signals can also have arguments:
+
+```gdscript
+signal health_changed(old_value, new_value)
+
+func take_damage(amount):
+    var old_health = health
+    health -= amount
+    health_changed.emit(old_health, health)
+```

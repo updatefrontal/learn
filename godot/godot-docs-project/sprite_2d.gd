@@ -9,3 +9,14 @@ func _process(delta):
 	
 	var velocity = Vector2.UP.rotated(rotation) * speed
 	position += velocity * delta
+
+
+func _on_button_pressed() -> void:
+	set_process(not is_processing())
+	
+func _ready():
+	var timer = get_node("Sprite2DTimer")
+	timer.timeout.connect(_on_timer_timeout)
+	
+func _on_timer_timeout():
+	visible = not visible

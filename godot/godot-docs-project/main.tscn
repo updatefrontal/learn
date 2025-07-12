@@ -14,7 +14,19 @@ position = Vector2(430, 303)
 texture = ExtResource("2_h2yge")
 script = ExtResource("3_1bvp3")
 
+[node name="Sprite2DTimer" type="Timer" parent="Sprite2D"]
+autostart = true
+
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(572, 493)
+position = Vector2(72, 579)
 texture = ExtResource("2_h2yge")
 script = ExtResource("4_1bvp3")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 472.0
+offset_top = 574.0
+offset_right = 673.0
+offset_bottom = 630.0
+text = "Toggle Motion"
+
+[connection signal="pressed" from="Button" to="Sprite2D" method="_on_button_pressed"]
