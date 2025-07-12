@@ -71,7 +71,75 @@ Godot scenes are saved as `.tscn` files (text scenes)
 
 ---
 
-### Scripting Languages
+### Scripts (`learn/godot/gdot-docs-project`)
 
+1. Add a `Sprite2D` node
+2. In **FileSystem** (bottom-left), drag a texture (e.g. `icon.svg`) into the Sprite's **Texture** property
+3. Right-click the node → **Attach Script**
+   - This creates a `.gd` file (GDScript)
 
+**Notes:**
+- Every `.gd` script is implicitly a **class**
+  - It inherits all properties and methods from the class it extends
+- **Inspector** shows properties in **Title Case**
+  - Hover over a property to see its `snake_case` version for use in code
 
+```gdscript
+# Example:
+extends Sprite2D
+
+# Constructor - called when an object is created
+func _init():
+    pass
+```
+
+- **Member Variables**:
+  - Exist as long as the object exists
+  - Store state/data
+  - Declared between `extends` and `func` blocks
+
+```gdscript
+var speed = 200
+```
+
+- `_process(delta)`:
+  - Special function called **every frame**
+  - Use it for updates like movement or animation
+
+```gdscript
+func _process(delta):
+    position.x += speed * delta
+```
+
+- **Ctrl + Click** any property/function to open its documentation
+
+---
+
+### Listening to Player Input (`learn/godot/gdot-docs-project`)
+
+2 ways:
+
+- `_unhandled_input(event)`:
+  - Virtual function that is called every time a key is pressed  
+  - Use to react to discrete input events  
+
+```gdscript
+func _unhandled_input(event):
+    if event.is_action_pressed("ui_accept"):
+        print("Accepted!")
+```
+
+- `Input` object:
+  - Use to check for input **every frame**
+
+```gdscript
+func _process(delta):
+    if Input.is_action_pressed("ui_left"):
+        position.x -= speed * delta
+```
+
+- `Input` was used because we need to know if the player wants to turn **every frame**  
+- `_process()` is used to **apply changes** to the node every frame  
+- `Sprite2D` attributes like `position` and `rotation` are used to move the node  
+
+---

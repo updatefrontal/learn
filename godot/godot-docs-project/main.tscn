@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmsu0vqd1a50o"]
+
+[ext_resource type="PackedScene" uid="uid://bdocx5sxwjl3a" path="res://label.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://r6ai4iydtemc" path="res://icon.svg" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://cl5yjxgkjss8t" path="res://sprite_2d.gd" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://bekc0vkkfhevc" path="res://sprite_2d_2.gd" id="4_1bvp3"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Label" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(430, 303)
+texture = ExtResource("2_h2yge")
+script = ExtResource("3_1bvp3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(572, 493)
+texture = ExtResource("2_h2yge")
+script = ExtResource("4_1bvp3")
