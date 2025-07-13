@@ -212,3 +212,95 @@ func take_damage(amount):
     health -= amount
     health_changed.emit(old_health, health)
 ```
+---
+
+# First 2D Game
+
+## Player
+
+```gdscript
+@export var speed = 400
+```
+
+- Exporting allows the `speed` variable to be set in the **Inspector**
+
+```gdscript
+func _ready():
+    # Called when the scene is instantiated
+    pass
+
+func _process(delta: float):
+    # Called every frame for this instance
+    pass
+```
+
+
+### Input
+
+- Input actions: `Project > Project Settings > Input Map`
+  - Add new actions or edit existing ones
+  - Use the **+** to assign key presses
+
+```gdscript
+if Input.is_action_pressed("move_right"):
+    position.x += speed * delta
+```
+
+- [`Vector Math` docs](https://docs.godotengine.org/en/stable/tutorials/math/vector_math.html#doc-vector-math)
+
+
+### Node Access
+
+- `$` is shorthand for `get_node()`
+
+```gdscript
+$AnimatedSprite2D.play()
+# Equivalent to:
+get_node("AnimatedSprite2D").play()
+```
+
+- Returns `null` if no node is found
+
+
+### Utility Functions
+
+```gdscript
+clamp(value, min, max)
+# Restricts value within the given range
+```
+
+
+### Choosing Animations
+
+- `flip_h`: Flip horizontally  
+- `flip_v`: Flip vertically
+
+
+### Collisions
+
+- Use **signals** to respond to collisions (e.g. when hit)
+- In the **Node** tab (top-right), see available signals for the selected node
+
+```gdscript
+# Example: disabling after a hit
+set_deferred("disabled", true)
+# Ensures the property is set only when safe (avoids mid-calculation bugs)
+```
+
+---
+
+## Enemy
+
+Scene-> New Scene
+VisibleOnScreenNotifier2D: Adds a signal for leacing/entering screen
+queue_free(): deletes the instance at the end of frame
+
+---
+
+## Main Scene
+
+---
+
+# Links
+
+- [Vector Math (Godot Docs)](https://docs.godotengine.org/en/stable/tutorials/math/vector_math.html#doc-vector-math)
