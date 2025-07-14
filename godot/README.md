@@ -301,6 +301,64 @@ queue_free(): deletes the instance at the end of frame
 
 ---
 
+### HUD
+
+- **CanvasLayer**:  
+  Used to draw UI elements on a layer above the rest of the scene.
+
+- **Control Nodes**:  
+  Base class for all UI elements.
+
+  - `Label`  
+    - Displays text  
+    - Can use custom fonts
+
+  - `Button`  
+    - Clickable UI element
+
+- **Control Node Properties**:  
+  - `position`: screen location  
+  - `size`: width and height  
+  - `anchor`: origin point (e.g., top-center in the Godot UI)
+
+---
+
+#### Await
+
+```gdscript
+await X
+```
+
+- Pauses execution of the function until `X` completes
+
+```gdscript
+await get_tree().create_timer(1.0).timeout
+```
+
+- Creates a temporary, **non-blocking** timer  
+- GDScript does **not** support `sleep()` — use this for delays
+
+---
+
+#### Connecting Signals
+
+- You can **pick an existing function** in the editor when connecting a signal.
+
+---
+
+#### Groups
+
+- Node → **Groups** tab (next to Signals in top-right of editor)
+- Use to **tag all instances** of a scene or similar nodes
+
+```gdscript
+get_tree().call_group("group_name", "method_name", arg1, arg2)
+```
+
+- Calls `method_name` on **every node** in `"group_name"` with optional arguments
+
+---
+
 # Links
 
 - [Vector Math (Godot Docs)](https://docs.godotengine.org/en/stable/tutorials/math/vector_math.html#doc-vector-math)
