@@ -4,18 +4,24 @@ extends Node
 var score: int
 
 func _ready():
-	pass
+	$Music.play()
 
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	
+	$Music.stop()
+	
 	$HUD.show_game_over()
+	$DeathSound.play()
 
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	
+	if not $Music.playing:
+		$Music.play()
 	
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")

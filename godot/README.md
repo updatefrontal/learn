@@ -7,8 +7,7 @@ A game is a **tree** of **nodes** grouped into **scenes**, communicating using *
 - **Scene Tree**: The hierarchy of all active scenes and nodes during gameplay.
 - **Node Tree**: The parent-child structure of nodes inside a single scene.
 - **Signal**: Godot's implementation of the [observer pattern](https://www.youtube.com/watch?v=NY_fzd8g5MU)
-
----
+ 
 
 ## Nodes
 
@@ -19,7 +18,6 @@ A game is a **tree** of **nodes** grouped into **scenes**, communicating using *
 - Extendable with new properties/functions
 - Can be parent/child of another node
 
----
 
 ## Scenes
 
@@ -29,8 +27,6 @@ A game is a **tree** of **nodes** grouped into **scenes**, communicating using *
 - They have a root node
 - Can be saved/loaded to storage
 - Multiple instances of a scene can exist (e.g., multiple characters)
-
----
 
 ### First Scene (`learn/godot/godot-docs-project`)
 
@@ -46,7 +42,6 @@ A game is a **tree** of **nodes** grouped into **scenes**, communicating using *
    - The main scene path is stored in `project.godot`
      - You can set it through **Project → Project Settings** or edit the file directly
 
----
 
 ### Creating Instances (`learn/godot/instancing_starter`)
 
@@ -68,8 +63,6 @@ Godot scenes are saved as `.tscn` files (text scenes)
   - Changed values will show a revert arrow (⟳)
 - **Note**: Some properties like `Physics Material` are **resources**:
   - Right-click the property → **Make Unique** to edit
-
----
 
 ### Scripts (`learn/godot/gdot-docs-project`)
 
@@ -113,8 +106,6 @@ func _process(delta):
 
 - **Ctrl + Click** any property/function to open its documentation
 
----
-
 ### Listening to Player Input (`learn/godot/gdot-docs-project`)
 
 2 ways:
@@ -142,7 +133,6 @@ func _process(delta):
 - `_process()` is used to **apply changes** to the node every frame  
 - `Sprite2D` attributes like `position` and `rotation` are used to move the node  
 
----
 
 ### Using Signals (`learn/godot/gdot-docs-project`)
 
@@ -212,7 +202,6 @@ func take_damage(amount):
     health -= amount
     health_changed.emit(old_health, health)
 ```
----
 
 # First 2D Game
 
@@ -287,19 +276,14 @@ set_deferred("disabled", true)
 # Ensures the property is set only when safe (avoids mid-calculation bugs)
 ```
 
----
-
 ## Enemy
 
 Scene-> New Scene
 VisibleOnScreenNotifier2D: Adds a signal for leacing/entering screen
 queue_free(): deletes the instance at the end of frame
 
----
 
 ## Main Scene
-
----
 
 ### HUD
 
@@ -321,8 +305,6 @@ queue_free(): deletes the instance at the end of frame
   - `size`: width and height  
   - `anchor`: origin point (e.g., top-center in the Godot UI)
 
----
-
 #### Await
 
 ```gdscript
@@ -338,13 +320,11 @@ await get_tree().create_timer(1.0).timeout
 - Creates a temporary, **non-blocking** timer  
 - GDScript does **not** support `sleep()` — use this for delays
 
----
 
 #### Connecting Signals
 
 - You can **pick an existing function** in the editor when connecting a signal.
 
----
 
 #### Groups
 
@@ -357,7 +337,52 @@ get_tree().call_group("group_name", "method_name", arg1, arg2)
 
 - Calls `method_name` on **every node** in `"group_name"` with optional arguments
 
----
+
+### Finishing Up
+
+#### Background
+
+- **ColorRect Node**  
+  - Used to set a solid background color
+
+- **TextureRect Node**  
+  - Used to set a background image
+
+- **Node Order**  
+  - Nodes listed first in the scene tree are drawn **behind** later ones
+
+#### Sound
+
+- **AudioStreamPlayer Node**  
+  - Used to play sound effects or music
+
+  - By default, **looping is disabled**  
+    - Click the sound file in the FileSystem and enable "Loop"
+
+  - Use the `play()` method in script to trigger the sound
+
+```gdscript
+$AudioStreamPlayer.play()
+```
+
+#### Unique Scenes & Resources
+
+- **Make Unique**  
+  - Use when you want a scene or resource instance to diverge from the original  
+  - Changes won't affect other instances of the original scene or resource
+
+#### Keyboard Shortcuts
+
+1. Go to **Project > Project Settings > Input Map**
+2. Add a new action name
+3. Click **+** to assign a key
+
+#### Assign Shortcut to a Button Node
+
+1. Select the `Button` node
+2. In the **Inspector**, find the `Shortcut` property
+3. Click `New Shortcut`
+4. Click the created Shortcut again to edit the **input event array**
 
 # Links
 
